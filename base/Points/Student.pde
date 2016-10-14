@@ -4,11 +4,11 @@
 void student_displayDancer(pt H, pt K, pt A, pt E, pt B, pt T) // displays dancer using dimensions
   {
   caplet(H,_rH,K,_rK);
-  caplet(K,_rK,A,_rA);
-  caplet(A,_rA,E,_rE);
-  caplet(E,_rE,B,_rB);
-  caplet(B,_rB,T,_rT);
-  caplet(A,_rA,B,_rB);
+  //caplet(K,_rK,A,_rA);
+  //caplet(A,_rA,E,_rE);
+  //caplet(E,_rE,B,_rB);
+  //caplet(B,_rB,T,_rT);
+  //caplet(A,_rA,B,_rB);
   noFill(); pen(magenta,2); edge(H,P(H,R(V(0,100),_hipAngle)));
   }
 
@@ -32,7 +32,7 @@ void caplet(pt A, float rA, pt B, float rB) // displays Isosceles Trapezoid of a
   {
   show(A,rA);
   show(B,rB);
-  // replace the line blow by your code to draw the proper caplet (cone) that the function displays th ecnvex hull of the two disks
+  // replace the line below with your code to draw the proper caplet (cone) that the function displays th ecnvex hull of the two disks
   cone(A,rA,B,rB); 
   }
   
