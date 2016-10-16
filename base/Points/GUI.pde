@@ -134,17 +134,20 @@ void keyPressed()  // executed each time a key is pressed: sets the Boolean "key
 void mousePressed()   // executed when the mouse is pressed
   {
   P.pickClosest(Mouse()); // pick vertex closest to mouse: sets pv ("picked vertex") in pts
+  P_onFloor.pickClosest(Mouse()); // let the user place and adjust 4 points on the floor
   if (keyPressed) 
      {
      if (key=='a')  P.addPt(Mouse()); // appends vertex after the last one
      if (key=='i')  P.insertClosestProjection(Mouse()); // inserts vertex at closest projection of mouse
      if (key=='d')  P.deletePickedPt(); // deletes vertex closeset to mouse
+  
      }  
   change=true;
   }
 
 void mouseDragged() // executed when the mouse is dragged (while mouse buttom pressed)
   {
+  P_onFloor.dragPicked(); // let the user place and adjust 4 points on the floor
   if (!keyPressed || (key=='a')|| (key=='i')) P.dragPicked();   // drag selected point with mouse
   if (keyPressed) {
       if (key=='.') f+=2.*float(mouseX-pmouseX)/width;  // adjust current frame   

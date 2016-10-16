@@ -35,7 +35,7 @@ void student_computeDancerPoints
     _T.y = floor;     // toe is on the ground 
     _E.y = floor- (_eb * sin(_heelAngle));
     _E.x = _B.x - (_eb * cos(_heelAngle));   
-    _A = triangleTip(_E,_ae,_B,_ab);
+    //_A = triangleTip(_E,_ae,_B,_ab);
     //_K = triangleTip(_H,_ae,_B,_ab);
    }
    

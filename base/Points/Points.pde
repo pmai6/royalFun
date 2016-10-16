@@ -4,6 +4,7 @@ import processing.pdf.*;    // to save screen shots as PDFs, does not always wor
 
 //**************************** global variables ****************************
 pts P = new pts(); // class containing array of points, used to standardize GUI
+pts P_onFloor = new pts(); // class containing array of 4 points on the floor
 float t=0, f=0;
 boolean animate=false, fill=false, timing=false;
 boolean showLetters=true; // toggles to display vector interpoations
@@ -24,8 +25,10 @@ void setup()               // executed once at the begining
   smooth();                  // turn on antialiasing
   myFace = loadImage("data/pic.jpg");  // load image from file pic.jpg in folder data *** replace that file with your pic of your own face
   P.declare(); // declares all points in P. MUST BE DONE BEFORE ADDING POINTS 
+  P_onFloor.declare();  
   //P.resetOnCircle(6); // sets P to have 4 points and places them in a circle on the canvas
   P.loadPts("data/pts");  // loads points form file saved with this program
+  P_onFloor.loadPts("data/floor_pts");
   } // end of setup
 
 //**************************** display current frame ****************************
@@ -38,6 +41,7 @@ void draw()      // executed at each frame
     
     pt H=P.G[0], K=P.G[1], A=P.G[2], E=P.G[3], B=P.G[4], T=P.G[5]; // local copy of dancer points from points of Polyloop P
     // Hip       Knee      Ankle    hEel       Ball      Toe
+    pt P0=P_onFloor.G[0], P1=P_onFloor.G[1], P2=P_onFloor.G[2], P3=P_onFloor.G[3];
  
     noFill(); pen(black,4); 
     P.drawCurve(); 
@@ -46,6 +50,7 @@ void draw()      // executed at each frame
       { 
       pen(black,2); 
       showId(_H,"H"); showId(_K,"K"); showId(_A,"A"); showId(_E,"E"); showId(_B,"B");showId(_T,"T");
+      showId(P0,"P0"); showId(P1,"P1"); showId(P2,"P2"); showId(P3,"P3");
       }
     noStroke(); fill(green);  student_displayDancer(H,K,A,E,B,T);
     student_computeDancerPoints(H,B,_hipAngle,_heelAngle); // computes _H,_K,_A,_E,_B,_T  from measures and _hipAngle
