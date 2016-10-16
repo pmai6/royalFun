@@ -4,11 +4,11 @@
 void student_displayDancer(pt H, pt K, pt A, pt E, pt B, pt T) // displays dancer using dimensions
   {
   caplet(H,_rH,K,_rK);
-  //caplet(K,_rK,A,_rA);
-  //caplet(A,_rA,E,_rE);
-  //caplet(E,_rE,B,_rB);
-  //caplet(B,_rB,T,_rT);
-  //caplet(A,_rA,B,_rB);
+  caplet(K,_rK,A,_rA);
+  caplet(A,_rA,E,_rE);
+  caplet(E,_rE,B,_rB);
+  caplet(B,_rB,T,_rT);
+  caplet(A,_rA,B,_rB);
   noFill(); pen(magenta,2); edge(H,P(H,R(V(0,100),_hipAngle)));
   }
 
@@ -17,22 +17,61 @@ void student_computeDancerPoints
     (
     pt H,     // hip center
     pt B,     // ball center 
-    float a   // angle between HB and HK
+    float a,   // angle between HB and HK
+    float floor // the ground line
+    
     )
   {
-   _H.setTo(H);   
-   _B.setTo(B); 
-   _K=P.G[1]; 
-   _A=P.G[2]; 
-   _E=P.G[3]; 
-   _T=P.G[5]; 
+    floor = height - 50;
+    _B.y = floor -_rB; // verticle distance of _rB above ground
+    _B.setTo(B); 
+    _T.setTo(P.G[5]); 
+    _T.x = _B.x + _bt;
+    _T.y = floor;     // toe is on the ground 
+    _E.setTo(P.G[3]);
+    _E.y = floor- (_eb * sin(_heelAngle));
+    _E.x = _B.x - (_eb * cos(_heelAngle));
+    
+    _H.setTo(H);   
+    _K.setTo(P.G[1]); 
+    _A.setTo(P.G[2]); 
+    
+   
    }
    
 void caplet(pt A, float rA, pt B, float rB) // displays Isosceles Trapezoid of axis(A,B) and half lengths rA and rB
   {
   show(A,rA);
   show(B,rB);
-  // replace the line below with your code to draw the proper caplet (cone) that the function displays th ecnvex hull of the two disks
+  float a = 0.0;
+  float b = 0.0;
+  float cb = 0.0;
+  // replace the line below with your code to draw the proper caplet (cone) that the function displays th convex hull of the two disks
+  //if(rB > rA){ 
+  //  a = rB - rA;
+  //  b = rB;
+  //}else{ 
+  //  a = rA - rB;
+  //  b = rA;
+  //}
+  //float cd = sqrt(sq(n(V(A,B)))-sq(a));
+  //if(rB > rA){
+  //  cb = sqrt(sq(cd)+sq(rA));
+  //}else{
+  //  cb = sqrt(sq(cd)+sq(rB));
+  //}
+  
+  //b = sqrt(sq(n(V(A,B))) - sq(a));
+  //pt C = triangleTip(A,cb,B,b);
+  //vec AC = U(A,C);
+  //vec BC = U(B,C);
+  //vec AC_rot = R(AC);
+  //pt A1 = P(A,rA,AC_rot);
+  //pt B1 = P(B,rB,BC);
+  //pt A2 = P(A,-rA,AC_rot);
+  //pt B2 = P(B,-rB,BC);
+  //beginShape(); v(B1); v(B2); v(A2); v(A1); endShape(CLOSE);
+  
   cone(A,rA,B,rB); 
   }
   
@@ -46,6 +85,18 @@ void cone(pt A, float rA, pt B, float rB) // displays Isosceles Trapezoid of axi
   pt RB = P(B,rB,N);
   beginShape(); v(LB); v(RB); v(RA); v(LA); endShape(CLOSE);
   }
+  
+pt triangleTip(pt A, float a, pt B, float b){
+  float x = 0.0;
+  float y = 0.0;
+  pt C = P(x,y);
+  vec AB = V(A,B);
+  float l = n(AB);
+  x = (sq(a)-sq(b)+sq(l))/(2*l);
+  y = sqrt(sq(b)-sq(x));
+  C = P(A, x, V(A,B), y, R(V(A,B)));
+  return C;
+}
 
     //(
     //pt H,     // hip center
