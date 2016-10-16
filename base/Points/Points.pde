@@ -42,19 +42,20 @@ void draw()      // executed at each frame
     pt H=P.G[0], K=P.G[1], A=P.G[2], E=P.G[3], B=P.G[4], T=P.G[5]; // local copy of dancer points from points of Polyloop P
     // Hip       Knee      Ankle    hEel       Ball      Toe
     pt P0=P_onFloor.G[0], P1=P_onFloor.G[1], P2=P_onFloor.G[2], P3=P_onFloor.G[3];
+    P0.y = height-50; P1.y = height-50; P2.y = height-50; P3.y = height-50; // set 4 points on the floor
  
     noFill(); pen(black,4); 
     P.drawCurve(); 
-       edge(_A,_B);  // add (foot top) edge from Ankle to Ball
+    edge(_A,_B);  // add (foot top) edge from Ankle to Ball
     if(showLetters) 
       { 
       pen(black,2); 
       showId(_H,"H"); showId(_K,"K"); showId(_A,"A"); showId(_E,"E"); showId(_B,"B");showId(_T,"T");
       showId(P0,"P0"); showId(P1,"P1"); showId(P2,"P2"); showId(P3,"P3");
       }
-    noStroke(); fill(green);  student_displayDancer(H,K,A,E,B,T);
+    noStroke(); fill(green);  student_displayDancer(_H,_K,_A,_E,_B,_T);
     student_computeDancerPoints(H,B,_hipAngle,_heelAngle); // computes _H,_K,_A,_E,_B,_T  from measures and _hipAngle
-    noFill(); pen(red,2); student_displayDancer(_H,_K,_A,_E,_B,_T);
+    //noFill(); pen(red,6); student_displayDancer(_H,_K,_A,_E,_B,_T); // draw the cone()
     
     noFill(); pen(red,4); 
     P.drawCurve(); 

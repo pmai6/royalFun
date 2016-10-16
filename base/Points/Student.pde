@@ -1,4 +1,4 @@
-// STUDENT'S NAME
+// STUDENT'S NAME: PHUC (ZURIE) MAI
 // PLEASE PLACE YOUR CODE IN THIS TAB
 
 void student_displayDancer(pt H, pt K, pt A, pt E, pt B, pt T) // displays dancer using dimensions
