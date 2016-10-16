@@ -22,21 +22,21 @@ void student_computeDancerPoints
     
     )
   {
-    floor = height - 50;
-    _B.y = floor -_rB; // verticle distance of _rB above ground
+    _H.setTo(H);
     _B.setTo(B); 
-    _T.setTo(P.G[5]); 
-    _T.x = _B.x + _bt;
-    _T.y = floor;     // toe is on the ground 
+    _T.setTo(P.G[5]);
     _E.setTo(P.G[3]);
-    _E.y = floor- (_eb * sin(_heelAngle));
-    _E.x = _B.x - (_eb * cos(_heelAngle));
-    
-    _H.setTo(H);   
     _K.setTo(P.G[1]); 
     _A.setTo(P.G[2]); 
     
-   
+    floor = height - 50;
+    _B.y = floor -_rB; // verticle distance of _rB above ground
+    _T.x = _B.x + _bt;
+    _T.y = floor;     // toe is on the ground 
+    _E.y = floor- (_eb * sin(_heelAngle));
+    _E.x = _B.x - (_eb * cos(_heelAngle));   
+    _A = triangleTip(_E,_ae,_B,_ab);
+    //_K = triangleTip(_H,_ae,_B,_ab);
    }
    
 void caplet(pt A, float rA, pt B, float rB) // displays Isosceles Trapezoid of axis(A,B) and half lengths rA and rB
@@ -92,7 +92,7 @@ pt triangleTip(pt A, float a, pt B, float b){
   pt C = P(x,y);
   vec AB = V(A,B);
   float l = n(AB);
-  x = (sq(a)-sq(b)+sq(l))/(2*l);
+  x = (sq(b)-sq(a)+sq(l))/(-2*l);
   y = sqrt(sq(b)-sq(x));
   C = P(A, x, V(A,B), y, R(V(A,B)));
   return C;
