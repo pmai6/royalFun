@@ -17,6 +17,10 @@ void student_computeDancerPoints
     (
     pt H,     // hip center
     pt B,     // ball center 
+    pt T,     // knee center 
+    pt E,     // ankle center 
+    pt A,     // heel center 
+    pt K,     // toe center 
     float a,   // angle between HB and HK
     float floor // the ground line
     
@@ -35,8 +39,15 @@ void student_computeDancerPoints
     _T.y = floor;     // toe is on the ground 
     _E.y = floor- (_eb * sin(_heelAngle));
     _E.x = _B.x - (_eb * cos(_heelAngle));   
-    //_A = triangleTip(_E,_ae,_B,_ab);
+    //_A = triangleTip(_B,_ae,_E,_ab);
     //_K = triangleTip(_H,_ae,_B,_ab);
+    
+    H.setTo(_H); 
+    B.setTo(_B); 
+    T.setTo(_T); 
+    K.setTo(_K); 
+    A.setTo(_A); 
+    E.setTo(_E);
    }
    
 void caplet(pt A, float rA, pt B, float rB) // displays Isosceles Trapezoid of axis(A,B) and half lengths rA and rB
@@ -89,12 +100,12 @@ void cone(pt A, float rA, pt B, float rB) // displays Isosceles Trapezoid of axi
 pt triangleTip(pt A, float a, pt B, float b){
   float x = 0.0;
   float y = 0.0;
-  pt C = P(x,y);
+  pt C = P();
   vec AB = V(A,B);
-  float l = n(AB);
+  float l = sqrt(sq(B.x-A.x)+sq(B.y-A.y));
   x = (sq(b)-sq(a)+sq(l))/(-2*l);
-  y = sqrt(sq(b)-sq(x));
-  C = P(A, x, V(A,B), y, R(V(A,B)));
+  y = sqrt(sq(a)-sq(x));
+  C = P(A, x, U(A,B), y, R(U(A,B)));
   return C;
 }
 

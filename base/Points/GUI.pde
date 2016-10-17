@@ -147,8 +147,10 @@ void mousePressed()   // executed when the mouse is pressed
 
 void mouseDragged() // executed when the mouse is dragged (while mouse buttom pressed)
   {
-  P_onFloor.dragPicked(); // let the user place and adjust 4 points on the floor
-  if (!keyPressed || (key=='a')|| (key=='i')) P.dragPicked();   // drag selected point with mouse
+  if (!keyPressed || (key=='a')|| (key=='i')){
+  //P.dragPicked();   // drag selected point with mouse
+    P_onFloor.dragPicked(); // let the user place and adjust 4 points on the floor
+  }
   if (keyPressed) {
       if (key=='.') f+=2.*float(mouseX-pmouseX)/width;  // adjust current frame   
       if (key=='/') _hipAngle-=PI*float(mouseX-pmouseX)/width;  // adjust current frame   
