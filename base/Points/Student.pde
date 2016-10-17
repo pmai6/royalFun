@@ -38,9 +38,9 @@ void student_computeDancerPoints
     _T.x = _B.x + _bt;
     _T.y = floor;     // toe is on the ground 
     _E.y = floor- (_eb * sin(_heelAngle));
-    _E.x = _B.x - (_eb * cos(_heelAngle));   
-    //_A = triangleTip(_B,_ae,_E,_ab);
-    //_K = triangleTip(_H,_ae,_B,_ab);
+    _E.x = _B.x - (_eb * cos(_heelAngle));
+    _A = triangleTip(_B,_ab,_E,_ae);
+    _K = triangleTip(_A, _ka, _H, _hk);
     
     H.setTo(_H); 
     B.setTo(_B); 
@@ -101,9 +101,9 @@ pt triangleTip(pt A, float a, pt B, float b){
   float x = 0.0;
   float y = 0.0;
   pt C = P();
-  vec AB = V(A,B);
+  //vec AB = V(A,B);
   float l = sqrt(sq(B.x-A.x)+sq(B.y-A.y));
-  x = (sq(b)-sq(a)+sq(l))/(-2*l);
+  x = (sq(b)-sq(a)-sq(l))/(-2*l);
   y = sqrt(sq(a)-sq(x));
   C = P(A, x, U(A,B), y, R(U(A,B)));
   return C;
